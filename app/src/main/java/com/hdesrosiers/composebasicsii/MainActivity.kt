@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.hdesrosiers.composebasicsii.ui.theme.ComposeBasicsIITheme
 
 class MainActivity : ComponentActivity() {
@@ -86,9 +87,41 @@ fun Counter(
   }
 }
 
+//@Composable
+//fun Greeting(name: String) {
+//  Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+//}
+
+
+
 @Composable
 fun Greeting(name: String) {
-  Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+  var isSelected by remember { mutableStateOf(false) }
+  val backgroundColor by animateColorAsState(
+    targetValue = if (isSelected) Color.Red else Color.Transparent
+  )
+
+//  Text(
+//    text = "Hello $name!",
+//    modifier = Modifier
+//      .clickable { isSelected = !isSelected } //Text() clickable crashes app...
+//      .fillMaxWidth()
+//      .padding(24.dp)
+//      .background(color = backgroundColor)
+//  )
+
+  TextButton(
+    onClick = { isSelected = !isSelected },
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(24.dp)
+      .background(color = backgroundColor)
+  ) {
+    Text(
+      text = "Hello $name!",
+//      style = MaterialTheme.typography.h1.copy(fontSize = 16.sp)
+    )
+  }
 }
 
 @Preview(showBackground = true)
